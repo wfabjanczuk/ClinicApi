@@ -1,4 +1,4 @@
-using ClinicApi.Mappers;
+using ClinicApi.Services;
 using ClinicApi.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +30,7 @@ namespace ClinicApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDbContextProvider, DbContextProvider>();
-            services.AddScoped<IDoctorMapper, DoctorMapper>();
+            services.AddScoped<IDoctorService, DoctorService>();
 
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
@@ -39,6 +39,7 @@ namespace ClinicApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClinicApi", Version = "v1" });
+                c.CustomSchemaIds(type => type.ToString());
             });
         }
 

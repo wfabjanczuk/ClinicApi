@@ -6,15 +6,21 @@ namespace ClinicApi.Providers
     public class DbContextProvider : IDbContextProvider
     {
         private readonly IConfiguration Configuration;
+        private static MainDbContext mainDbContext;
 
         public DbContextProvider(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public MainDbContext getDbContext()
+        public MainDbContext GetDbContext()
         {
-            return new MainDbContext(Configuration);
+            if (mainDbContext == null)
+            {
+                mainDbContext = new MainDbContext(Configuration);
+            }
+
+            return mainDbContext;
         }
     }
 }

@@ -4,6 +4,6 @@ namespace ClinicApi.Providers
 {
     public interface IDbContextProvider
     {
-        public MainDbContext getDbContext();
+        public MainDbContext GetDbContext();
     }
 }
